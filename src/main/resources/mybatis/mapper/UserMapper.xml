@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mybatis10.dao.Userdao">
+
+    <!--회원가입-->
+    <insert id="usersingup" parameterType="com.example.mybatis10.vo.Uservo">
+            insert into sns.basic
+                (id, password, address, age)
+            values
+                (#{id},#{password},#{address},#{age})
+    </insert>
+
+    <!--로그인-->
+    <select id="login" resultType="com.example.mybatis10.vo.Uservo">
+            select * from sns.basic where id = #{id} and password = #{password}
+    </select>
+
+
+    <!--게시글등록-->
+    <insert id="board" parameterType="com.example.mybatis10.vo.Boardvo">
+            insert into sns.board
+            (id, board_title, board_content)
+            values
+            (#{id},#{board_title},#{board_content})
+    </insert>
+
+
+    <delete id="board_delete" parameterType="com.example.mybatis10.vo.Boardvo">
+            delete form where sns.board and id = #{id}
+    </delete>
+
+
+    <!--게시판리스트 불러오기-->
+    <select id="board_list" resultType="com.example.mybatis10.vo.Boardvo">
+            select id, board_title, board_content, board_pk, like_count, board_join from sns.board
+    </select>
+
+    <!--게시판 상세페이지 조회수 증가-->
+    <update id="board_check" parameterType="com.example.mybatis10.vo.Boardvo">
+            update sns.board set board_join = board_join + 1
+    </update>
+
+    <!--친구목록 불러오기-->
+    <select id="friendlist" resultType="com.example.mybatis10.vo.Uservo">
+            select id from sns.basic where
+    </select>
+
+    <!--친구 추가시 리스트에있는 값인지 체크 유무 확인-->
+    <select id = "friendcheck" resultType="com.example.mybatis10.vo.Uservo">
+             select id from sns.basic
+    </select>
+
+    <!--친구추가하기-->
+    <insert id="friendadd" parameterType="com.example.mybatis10.vo.Friendvo">
+            insert into sns.friend
+            (friend_id, friend)
+            values
+            (#{friend_id},#{friend})
+    </insert>
+
+    <!--등록된 친구목록 확인-->
+    <select id="list_result" resultType="com.example.mybatis10.vo.Friendvo">
+            select friend from sns.friend
+    </select>
+
+    <!--게시글 상세보기-->
+    <select id="read" resultType="com.example.mybatis10.vo.Boardvo">
+            select * from sns.board where board_pk = #{board_pk}
+    </select>
+
+    <!--좋아요 카운트 업데이트-->
+    <update id="like_update" parameterType="com.example.mybatis10.vo.Boardvo">
+        update sns.board set like_count = like_count + 1 where board_pk = #{board_pk}
+    </update>
+
+    <!-- 게시글 좋아요   -->
+    <insert id="input_like" parameterType="com.example.mybatis10.vo.Likevo">
+        insert into sns.like
+        (like_id, board_id)
+        values
+        (#{like_id},#{board_id})
+    </insert>
+
+    <!--좋아요 판단여부-->
+    <select id="select_like" resultType="com.example.mybatis10.vo.Likevo">
+        select board_like from sns.like where like_id = #{like_id} and board_id=#{board_id}
+    </select>
+
+    <!--게시글 좋아요 삭제-->
+    <delete id="like_remove" parameterType="com.example.mybatis10.vo.Likevo">
+        delete from sns.like where like_id = #{like_id} and board_id = #{board_id}
+    </delete>
+
+    <!--게시글 좋아요 카운트 초기화-->
+    <update id="like_cancel" parameterType="com.example.mybatis10.vo.Boardvo">
+        update sns.board set like_count = 0 where board_pk = #{board_pk}
+    </update>
+
+    <!--회원가입 아이디 중복체크-->
+    <select id="id_check" resultType="com.example.mybatis10.vo.Uservo">
+        select * from sns.basic where id = #{id}
+    </select>
+
+    <!--상세페이지 댓글달기-->
+    <insert id="input_com" useGeneratedKeys="true" keyProperty="com_num" parameterType="com.example.mybatis10.vo.Comvo">
+        insert into sns.comments
+        (com_pk, com_user, comments)
+        values
+        (#{com_pk},#{com_user},#{comments})
+    </insert>
+
+    <!--페이지당 댓글 카운트 업데이트-->
+    <update id="com_cnt" parameterType="com.example.mybatis10.vo.Comvo">
+        update sns.comments set com_count = com_count + 1 where com_pk = #{com_pk}
+    </update>
+
+    <!--도배제한 댓글갯수 체크쿼리문-->
+    <select id="check_cnt" resultType="int">
+        select count(*) from sns.comments where com_user = #{com_user} and com_pk = #{com_pk}
+    </select>
+
+    <!--상세페이지 댓글불러오기-->
+    <select id="view_com" resultType="com.example.mybatis10.vo.Comvo">
+        select com.com_user, com.comments, board.board_pk, com_num
+         from sns.board board right join sns.comments com
+          on board.board_pk = com.com_pk
+            where board_pk = #{com_pk}
+    </select>
+
+    <!--게시글작성자 댓글제한-->
+    <select id="check_id" resultType="com.example.mybatis10.vo.Boardvo">
+        select * from sns.board where board_pk = #{board_pk} and id = #{id};
+    </select>
+
+    <!--댓글삭제-->
+    <delete id="com_remove" parameterType="com.example.mybatis10.vo.Comvo">
+        delete from sns.comments where com_num = #{com_num} and com_user = #{com_user}
+    </delete>
+
+
+</mapper>

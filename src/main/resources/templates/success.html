@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>로그인성공</title>
+</head>
+<body>
+<h3></h3>
+<div>
+    <form method="post" action="success">
+        <label>로그인성공</label><br/>
+        <span th:text="${session.user_id}"></span><a>님 환영합니다</a>
+    </form>
+
+    <dib>
+        <button onclick="location.href='board_write'">글쓰기</button>
+    </dib>
+
+    <div>
+<!--        <from>-->
+            <button onclick="location.href='logout'">로그아웃</button>
+<!--        </from>-->
+    </div>
+
+    <div>
+        <button onclick="location.href='friend_list'">친구추가</button>
+    </div>
+
+    <div>
+        <button onclick="location.href='board_list'">게시판리스트</button>
+    </div>
+
+</div>
+</body>
+</html>

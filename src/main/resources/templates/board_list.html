@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>게시판</title>
+</head>
+<body>
+<h3>게시글</h3>
+<div>
+    <form method="post" action="board_list">
+        <table>
+        <tr>
+            <th>글번호</th>
+            <th>작성자</th>
+            <th>글제목</th>
+            <th>글내용</th>
+            <th>추천수</th>
+            <th>조회수</th>
+        </tr>
+            <tr th:each="Boardvo : ${board_list}">
+                <td>
+                    <span th:text="${Boardvo.board_pk}"></span>
+                </td>
+                <td>
+                    <span th:text="${Boardvo.id}"></span>
+                </td>
+                <td>
+                    <a th:href="@{board_detail ( board_pk=${Boardvo.board_pk} )}"><span th:text="${Boardvo.board_title}"></span></a>
+                </td>
+                <td>
+                    <span th:text="${Boardvo.board_content}"></span>
+                </td>
+                <td>
+                    <span th:text="${Boardvo.like_count}"></span>
+                </td>
+                <td>
+                    <span th:text="${Boardvo.board_join}"></span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+    <div>
+        <button onclick="location.href='board_write'">글작성하기</button>
+        <button onclick="location.href='success'">뒤로가기</button>
+    </div>
+
+</body>
+
+</html>

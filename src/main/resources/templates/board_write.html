@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>게시글쓰기</title>
+</head>
+<body>
+<h3>글쓰기</h3>
+<div>
+    <form method="post" action="board_write" th:object="${Boardvo}">
+
+        <label>제목</label>
+        <textarea type="text" name="board_title" th:text="${Board}"></textarea>
+        <br>
+        <label>내용</label>
+        <textarea type="text" name="board_content"></textarea>
+
+        <div>
+            <button type="submit" >등록하기</button>
+        </div>
+    </form>
+    <div>
+        <button onclick="location.href='success'">뒤로가기</button>
+    </div>
+</body>
+</html>

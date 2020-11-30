@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>친구목록</title>
+</head>
+<body>
+<h3>추천친구</h3>
+<div>
+    <form method="post" action="friend_list">
+        <label>친구목록</label>
+        <br />
+        <tr th:each="Uservo : ${friendlist}">
+            <td th:text="${Uservo.id}"></td> <br/>
+        </tr>
+        <br />
+        <div>
+            <button type="submit">추천 친구리스트</button>
+        </div>
+    </form>
+</div>
+
+<div>
+    <form method="post" action="frined_add">
+        <input type="text" name="friend" />
+        <button type="submit">친구추가</button>
+    </form>
+</div>
+
+<div>
+    <button onclick="location.href='success'">뒤로가기</button>
+</div>
+
+<div>
+    <form method="post" action="list_result">
+        <label>친구리스트</label>
+        <br />
+        <tr th:each="Friendvo : ${result}">
+            <td th:text="${Friendvo.friend}"></td> <br/>
+        </tr>
+        <br />
+        <div>
+            <button type="submit">등록된 친구목록</button>
+        </div>
+    </from>
+</div>
+
+</body>
+</html>

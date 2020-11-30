@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>상세보기</title>
+</head>
+
+<body>
+
+<h3>게시글 상세보기</h3>
+
+<div>
+    <tr>
+        <label>글 번호 : </label>
+        <td><span th:text="${board_number.board_pk}"></span></td><br/>
+        <label>글 작성자 : </label>
+        <td><span th:text="${board_number.id}"></span></td><br/>
+        <label>제목 : </label>
+        <td><span th:text="${board_number.board_title}"></span></td><br/>
+        <label>내용 : </label>
+        <td><span th:text="${board_number.board_content}"></span></td><br/>
+        <label>좋아요 : </label>
+        <td><span th:text="${board_number.like_count}"></span></td><br/>
+    </tr>
+
+    <div>
+        <button onclick="location.href='board_list'"> 게시판 리스트 돌아가기 </button>
+    </div>
+
+    <form action="like_success" method="post">
+        <button onclick="location.href='like_success'">like</button>
+        </form>
+
+        <br />
+
+        <!--댓글등록-->
+        <div>
+            <form id="commentRegister" method="post" action="com_register">
+                <span style="font-size: 30px">comments</span><br/>
+                <input type="text" name="comments">
+<!--                        <button type="submit">댓글등록</button>-->
+            </form>
+<!--            <input type="text" name="comments">-->
+            <button onclick="checked();">댓글등록</button>
+        </div>
+        <br />
+
+        <table>
+            <tr>
+                <td><span>작성자</span></td>
+                <td><span>comments</span></td>
+            </tr>
+
+            <!-- -->
+            <tr th:each="Comvo : ${com}">
+                <div>
+                    <td><span th:text="${Comvo.com_user}"></span></td>
+                    <td><span th:id="${Comvo.com_user}"th:text="${Comvo.comments}"></span></td>
+                    <td><input type="hidden" th:value="${Comvo.com_num}" /><td>
+
+                    <!--댓글삭제-->
+                    <form method="post" action="com_remove">
+                        <input type="hidden" name = "com_user" th:value="${Comvo.com_user}" />
+                        <input type="hidden" name = "com_num" th:value="${Comvo.com_num}" />
+                        <button type="submit">댓글삭제</button>
+                    </form>
+                </div>
+            </tr>
+        </table>
+
+            <!--댓글 5개 제한 창띄우는 스크립트-->
+            <input id="userCount"  type="hidden" th:value="${count}"/>
+</div>
+
+<!--5개제한 창 띄우는 스크립트-->
+<script>
+    function checked(){
+        var userName = document.getElementById('userCount').value;
+        if(Number(userName)>=5)
+        {
+           alert('댓글은 5개까지만 등록 가능합니다!');
+        }
+        else if(Number(userName)<5)
+        {
+            document.getElementById('commentRegister').submit();
+        }
+    }
+</script>
+<!--댓글제한 스크립트-->
+
+</body>
+
+
+<!--<div>-->
+<!--    <form id="like_button" action="like_success" method="post">-->
+<!--        <input type="button" id="like_success" value="like"/>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+<!--<script>-->
+<!--   window.onload = function ()-->
+<!--   {-->
+<!--       document.getElementById('like_btn').onclick =-->
+
+<!--           function (){-->
+<!--           document.getElementById('like_button').submit();-->
+<!--       }-->
+<!--   }-->
+
+<!--    function a() {-->
+<!--        var select = confirm("좋아요 누를꺼야??");-->
+<!--        if (select) {-->
+<!--            alert("좋아요 선택")-->
+<!--            /*여기서 자바스크립트로 폼데이터를 넘기는 자바스크립트 로직을 짜고 값을 넘기고 해당 컨트롤러에서는 다시 같읕 페이지로 리다이렉트하면 됩니다>!*/-->
+<!--        }-->
+<!--        else-->
+<!--        {-->
+<!--            alert("좋아요 취소!")-->
+<!--            return;-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+</html>

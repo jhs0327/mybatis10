@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h3>회원가입</h3>
+
+<div>
+<!--    <div>-->
+<!--        <form method="post" action="singup">-->
+<!--            <label>아이디</label>-->
+<!--            <input type="text" name="id" class = "text1">-->
+<!--            <button type="submit">아이디 중복체크</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+    <form method="post" action="singup">
+        <div>
+            <label>아이디</label>
+            <input type="text" name="id" class = "text1">
+
+<!--            <input type="hidden" name="id" value="id">-->
+        </div>
+        <div>
+            <label>비밀번호</label>
+            <input type="password" name="password" class="text2">
+        </div>
+        <div>
+            <label>주소</label>
+            <input type="text" name="address" class="text3">
+        </div>
+        <div>
+            <label>나이</label>
+            <input type="text" name="age" class="text4">
+        </div>
+        <button type="submit">회원가입</button>
+
+        <!--회원가입 페이지에서 뒤로가기-->
+    </form>
+
+    <div>
+        <button onclick="location.href='login'">뒤로가기</button>
+    </div>
+
+</div>
+
+
+<script>
+
+
+
+</script>
+</body>
+
+<!--<script>-->
+<!--    document.getElementById()-->
+<!--    $(document).ready(function (){-->
+<!--        $('input[type="button"]').on('click',function(){-->
+<!--            check();-->
+<!--        });-->
+<!--        function check(){-->
+<!--            var id = $('.test1').val();-->
+<!--            var password = $('.test2').val();-->
+<!--            var address = $('.test3').val();-->
+<!--            var age = $('.test4').val();-->
+
+<!--            if(id.length == null){-->
+<!--                alert("아이디를 입력하세요");-->
+<!--                $('.text1').focus();-->
+<!--                return false;-->
+<!--            }-->
+<!--            else if(password.length == null){-->
+<!--                alert("비밀번호를 입력하세요");-->
+<!--                $('.text2').focus();-->
+<!--                return false;-->
+<!--            }-->
+<!--            else if(address.length == null){-->
+<!--                alert("비밀번호를 입력하세요");-->
+<!--                $('.text3').focus();-->
+<!--                return false;-->
+<!--            }-->
+<!--            else if(age.length == null){-->
+<!--                alert("비밀번호를 입력하세요");-->
+<!--                $('.text4').focus();-->
+<!--                return false;-->
+<!--            } else {-->
+<!--                alert("회원가입 성공");-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+</html>

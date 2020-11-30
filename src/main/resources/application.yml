@@ -1,0 +1,34 @@
+spring:
+  datasource:
+
+#    일반적인 담당
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/sns?serverTimezone=UTC&characterEncoding=UTF-8
+
+#   쿼리문 로그출력
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/sns?serverTimezone=UTC&characterEncoding=UTF-8
+
+    username: root
+    password: pw123
+
+  #file size
+  servlet:
+    multipart:
+      max-file-size: 100KB
+      max-request-size: 100KB
+
+  #thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+    cache: false
+    suffix: .html
+
+#mybatis
+mybatis:
+  type-aliases-package: com.example.mybatis10.dao.Userdao
+  mapper-locations: mybatis/mapper/**/*.xml
+
+server:
+  port: 8080
+
